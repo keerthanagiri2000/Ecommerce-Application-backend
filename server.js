@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import connectDatabase from "./MongoDb.js";
 import ImportData from "./DataImport.js";
 import productRoute from "./Routes/ProductRoutes.js";
@@ -10,6 +11,7 @@ import orderRouter from "./Routes/OrderRoutes.js";
 dotenv.config();
 connectDatabase()
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 //API
@@ -29,5 +31,5 @@ app.get("/", (req,res) =>{
     res.send("API is running")
 });
 
-const PORT = process.env.PORT || 1000;
+const PORT = process.env.PORT;
 app.listen(PORT, console.log(`server run in ${PORT}`));
